@@ -138,20 +138,31 @@
             </li>
 
             
-            <li class="menu-item @if(Session::get('page')=='view_sections' || Session::get('page')=='view_categories' || Session::get('page')=='view_products') active open @endif">
+            <li class="menu-item @if(Session::get('page')=='sections' || Session::get('page')=='categories'|| Session::get('page')=='subcategories' || Session::get('page')=='subcat' || Session::get('page')=='products') active open @endif">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user"></i>
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
                 <div data-i18n="Catalogue Management">Catalogue Management</div>
               </a>
               <ul class="menu-sub">
+                
+                <li class="menu-item @if(Session::get('page')=='categories') active @endif">
+                  <a href="{{url('admin/categories')}}" class="menu-link">
+                    <div data-i18n="Categories">Categories</div>
+                  </a>
+                </li>
+                <li class="menu-item @if(Session::get('page')=='subcategories') active @endif">
+                  <a href="{{url('admin/subcategories')}}" class="menu-link">
+                    <div data-i18n="Sub Categories">Sub Categories</div>
+                  </a>
+                </li>
+                <li class="menu-item @if(Session::get('page')=='subcat') active @endif">
+                  <a href="{{url('admin/subcat')}}" class="menu-link">
+                    <div data-i18n="Sub SubCategories">Sub SubCategories</div>
+                  </a>
+                </li>
                 <li class="menu-item @if(Session::get('page')=='sections') active @endif">
                   <a href="{{url('admin/sections')}}" class="menu-link">
                     <div data-i18n="Sections">Sections</div>
-                  </a>
-                </li>
-                <li class="menu-item @if(Session::get('page')=='view_categories') active @endif">
-                  <a href="{{url('admin/categories')}}" class="menu-link">
-                    <div data-i18n="Categories">Categories</div>
                   </a>
                 </li>
                 <li class="menu-item @if(Session::get('page')=='view_products') active @endif">

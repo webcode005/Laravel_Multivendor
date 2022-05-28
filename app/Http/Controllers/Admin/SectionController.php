@@ -14,10 +14,8 @@ class SectionController extends Controller
     {       
             Session::put('page',"sections");
             $sections = Section::select("*")
-            // ->where("uploaded_by", $User_Id)
             ->orderBy('id', 'DESC')
             ->get();
-            //print_r($setion['sections']);
 
             $title = "Sections";
 

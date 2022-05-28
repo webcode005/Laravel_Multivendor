@@ -112,21 +112,6 @@ $(document).on("click",".updateSectionStatus",function(){
 
 // delete section simple js
 
-// $(".deletesection").click(function(){
-//     var title = $(this).attr("title");
-//     if(confirm("Are You Sure to delete this " + title+"?"))
-//     {
-//         return true;
-//     }
-//     else
-//     {
-//         return false;
-//     }
-
-// });
-
-// delete section sweetalert js
-
 $(".deletesection").click(function(){
     var title = $(this).attr("title");
     if(confirm("Are You Sure to delete this " + title+"?"))
@@ -140,8 +125,130 @@ $(".deletesection").click(function(){
 
 });
 
+// delete section sweetalert js
+
+// $(".deletesection").click(function(){
+//     var title = $(this).attr("title");
+//     if(confirm("Are You Sure to delete this " + title+"?"))
+//     {
+//         return true;
+//     }
+//     else
+//     {
+//         return false;
+//     }
+
+// });
 
 
+// Active / Inactive Categories Status
+
+$(document).on("click",".updateCategoryStatus",function(){
+    var status = $(this).children("span").attr("status");
+    var category_id = $(this).attr("category_id");
+    
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type:'post',
+            url:'/admin/update-category-status',
+            data:{status:status,category_id:category_id},
+            success:function(resp)
+            {
+                if(resp['status'] == 0)
+                {
+                    $("#category-"+category_id).html("<span class='badge bg-danger'  id='status' status='InActive'> InActive </span>");
+                }
+                else if(resp['status'] == 1)
+                {
+                    $("#category-"+category_id).html("<span class='badge bg-success'  id='status' status='Active'> Active </span>");
+                }
+            },error:function()
+            {
+                alert('Error');
+            }
+
+        });
+
+
+});
+
+// delete Category simple js
+
+$(".deletecategory").click(function(){
+    var title = $(this).attr("title");
+    if(confirm("Are You Sure to delete this " + title+"?"))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+});
+
+
+// // Append Category Level 
+
+// $("#section_id").change(function(){
+//     var section_id = $(this).val();
+
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+
+//     $.ajax({
+//         type:'get',
+//         url:'/admin/append-categories-level',
+//         data:{section_id:section_id},
+//         success:function(resp)
+//         {
+//             $("#appendCategoryLevel").html(resp);
+
+//         },error:function()
+//         {
+//             alert('Error');
+//         }
+
+//     });
+
+// });  
+
+// Append Category Level 
+
+$("#category_id").change(function(){
+    var category_id = $(this).val();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type:'post',
+        url:'/admin/append-subcategories',
+        data:{category_id:category_id},
+        success:function(resp)
+        {
+            $("#appendCategoryLevel").html(resp);
+
+        },error:function()
+        {
+            alert('Error');
+        }
+
+    });
+
+});   
 
 
 
